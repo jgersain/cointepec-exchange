@@ -3,8 +3,13 @@
     <thead>
       <tr class="bg-gray-100 border-b-2 border-gray-400">
         <th></th>
-        <th>
-          <span>Ranking</span>
+        <th :class="{ up: this.sortOrder === 1, down: this.sortOrder === -1 }">
+          <span
+            @click="changeSortOrder"
+            class="underline cursor-pointer"
+          >
+            Ranking
+          </span>
         </th>
         <th>Nombre</th>
         <th>Precio</th>
@@ -82,23 +87,33 @@ export default {
 
   computed: {
     filteredAssets () {
-      if (!this.filter) return this.assets
-      
+      const altOrder = this.sortOrder === 1 ? -1 : 1
+
       return this.assets.filter(
         asset =>
           asset.name.toLowerCase().includes(this.filter.toLowerCase()) ||
           asset.symbol.toLowerCase().includes(this.filter.toLowerCase())
       )
+      .sort((a,b) => {
+        if (parseInt(a.rank) > parseInt(b.rank)) return this.sortOrder
+
+        return altOrder
+      })
     },
   },
 
   data () {
     return {
       filter: '',
+      sortOrder: 1,
     }
   },
 
   methods: {
+    changeSortOrder () {
+      this.sortOrder = this.sortOrder === 1 ? -1 : 1
+    },
+
     goToDetail(id) {
       this.$router.push({ name: 'coin-detail', params: { id } })
     },
