@@ -70,6 +70,14 @@
           <span class="text-xl"></span>
         </div>
       </div>
+
+      <line-chart 
+        class="my-10"
+        :colors="['orange']"
+        :min="min"
+        :max="max"
+        :data="history.map(value => [value.date, parseFloat(value.priceUsd).toFixed(2)])"
+      />
     </template>
   </div>
 </template>
