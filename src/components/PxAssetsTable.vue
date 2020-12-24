@@ -20,14 +20,21 @@
         :key="asset.id"
       >
         <td>
-          <img :src="`https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`" 
-          alt="asset.name">
+          <img
+            class="w-10 h-10" 
+            :src="`https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`" 
+            alt="asset.name"
+          >
         </td>
         <td># {{ asset.rank }}</td>
         <td>{{ asset.name }}</td>
-        <td>{{ asset.priceUsd }}</td>
-        <td>{{ asset.marketCapUsd }}</td>
-        <td>{{ asset.changePercent24Hr }}</td>
+        <td>{{ asset.priceUsd | dollar }}</td>
+        <td>{{ asset.marketCapUsd | dollar }}</td>
+        <td
+          :class="asset.changePercent24Hr.includes('-') ? 'text-red-600' : 'text-green-600'"
+        >
+          {{ asset.changePercent24Hr | percent }}
+        </td>
         <td class="hidden sm:block"></td>
       </tr>
     </tbody>
@@ -43,7 +50,7 @@ export default {
       type: Array,
       default: () => []
     }
-  }
+  },
 }
 </script>
 
