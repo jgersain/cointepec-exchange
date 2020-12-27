@@ -1,24 +1,14 @@
-# vue-exchange
+# cointepec-exchange 👽
 
-## Project setup
+Proyecto para obtener las cotizaciones de las criptomonedas más importantes, haciendo uso de la API REST de CoinCap, VueJS, VueCLI, VueSpinners, Fetch, NumeralJS y TailwindCSS
+
+[Netlify deploy 👈](cointepec.netlify.app)
+
+## Useful commands 👨‍🚀
+
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
 npm run build
-```
-
-### Lints and fixes files
-```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
