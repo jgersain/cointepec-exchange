@@ -61,7 +61,7 @@
         >
           {{ asset.changePercent24Hr | percent }}
         </td>
-        <td class="hidden sm:block">
+        <td class="hidden lg:block">
           <px-button @click="goToDetail(asset.id)">
             <span>Detalle</span>
           </px-button>

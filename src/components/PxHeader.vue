@@ -1,7 +1,7 @@
 <template>
-  <header class="shadow w-screen">
+  <header class="shadow w-screen bg-red-900">
     <nav>
-      <nav class="flex items-center justify-between flex-wrap bg-red-900 p-6">
+      <nav class="container flex items-center justify-between flex-wrap bg-red-900 p-6">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
           <px-icon class="mr-2" />
           <router-link
@@ -14,14 +14,24 @@
         <div
           class="hidden sm:block w-full block flex-grow lg:flex lg:items-center lg:w-auto"
         >
-          <div class="text-sm lg:flex-grow">
+          <div class="text-sm">
             <router-link
-              class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              class="block mt-4 lg:inline-block lg:mt-0 text-red-200 hover:text-white mr-4"
               v-for="link in links"
               :key="link.title"
               :to="link.to"
             >
               {{ link.title }}
+            </router-link>
+          </div>
+        </div>
+        <div class="lg:flex">
+          <div class="text-sm">
+            <router-link
+              class="block mt-4 lg:inline-block lg:mt-0 text-red-200 hover:text-white mr-4"
+              :to="{ name: 'about' }"
+            >
+              Más
             </router-link>
           </div>
         </div>
