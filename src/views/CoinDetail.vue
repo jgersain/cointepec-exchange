@@ -158,6 +158,12 @@ export default {
     this.getCoin()
   },
 
+  watch: {
+    $route () {
+      this.getCoin()
+    },
+  },
+
   methods: {
     getExchangeUrl(exchange) {
       this.$set(exchange, 'isLoading', true)
