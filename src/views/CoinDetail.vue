@@ -1,11 +1,7 @@
 <template>
   <div class="flex-col">
     <div class="flex justify-center">
-      <bounce-loader 
-        :loading="isLoading" 
-        :color="'#68d391'" 
-        :size="100" 
-      />
+      <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
     </div>
     <template v-if="!isLoading">
       <div class="flex flex-col sm:flex-row justify-around items-center">
@@ -78,19 +74,24 @@
         </div>
       </div>
 
-      <line-chart 
+      <line-chart
         class="my-10"
         :colors="['orange']"
         :min="min"
         :max="max"
-        :data="history.map(value => [value.date, parseFloat(value.priceUsd).toFixed(2)])"
+        :data="
+          history.map(value => [
+            value.date,
+            parseFloat(value.priceUsd).toFixed(2)
+          ])
+        "
       />
 
       <h3 class="text-xl my-10">Mejores ofertas de cambio</h3>
       <table>
-        <tr 
+        <tr
           class="border-b"
-          v-for="market in markets" 
+          v-for="market in markets"
           :key="`${market.exchangeId}-${market.priceUsd}`"
         >
           <td>
@@ -99,9 +100,7 @@
           <td>
             {{ market.priceUsd | dollar }}
           </td>
-          <td>
-            {{ market.baseSymbol }} / {{ market.quoteSymbol }}
-          </td>
+          <td>{{ market.baseSymbol }} / {{ market.quoteSymbol }}</td>
           <td>
             <px-button
               v-if="!market.url"
@@ -110,11 +109,7 @@
             >
               <span>Obtener link</span>
             </px-button>
-            <a 
-              v-else
-              class="hover:underline text-green-600" 
-              target="_blanck" 
-            >
+            <a v-else class="hover:underline text-green-600" target="_blanck">
               {{ market.url }}
             </a>
           </td>
@@ -141,37 +136,37 @@ export default {
       markets: [],
       isLoading: false,
       fromUsd: true,
-      convertData: null,
+      convertData: null
     }
   },
 
   computed: {
-    min () {
+    min() {
       return Math.min(
         ...this.history.map(value => parseFloat(value.priceUsd).toFixed(2))
       )
     },
-    max () {
+    max() {
       return Math.max(
         ...this.history.map(value => parseFloat(value.priceUsd).toFixed(2))
       )
     },
-    avg () { 
+    avg() {
       return Math.abs(
         ...this.history.map(value => parseFloat(value.priceUsd).toFixed(2))
       )
     },
-    convertedResult () {
+    convertedResult() {
       if (!this.convertData) {
         return 0
       }
 
-      const result = this.fromUsd 
+      const result = this.fromUsd
         ? this.convertData / this.asset.priceUsd
         : this.convertData * this.asset.priceUsd
-      
+
       return result.toFixed(4)
-    },
+    }
   },
 
   created() {
@@ -179,20 +174,21 @@ export default {
   },
 
   watch: {
-    $route () {
+    $route() {
       this.getCoin()
-    },
+    }
   },
 
   methods: {
-    toggleConverterPrice () {
+    toggleConverterPrice() {
       this.fromUsd = !this.fromUsd
     },
 
     getExchangeUrl(exchange) {
       this.$set(exchange, 'isLoading', true)
-      
-      return api.getExchange(exchange.exchangeId)
+
+      return api
+        .getExchange(exchange.exchangeId)
         .then(res => this.$set(exchange, 'url', res.exchangeUrl))
         .finally(() => this.$set(exchange, 'isLoading', false))
     },
@@ -201,14 +197,18 @@ export default {
       const id = this.$route.params.id
       this.isLoading = true
 
-      Promise.all([api.getAsset(id), api.getAssetHistory(id), api.getMarkets(id)])
+      Promise.all([
+        api.getAsset(id),
+        api.getAssetHistory(id),
+        api.getMarkets(id)
+      ])
         .then(([asset, history, markets]) => {
           this.asset = asset
           this.history = history
           this.markets = markets
         })
-        .finally(() => this.isLoading = false)
-    },
+        .finally(() => (this.isLoading = false))
+    }
   }
 }
 </script>
@@ -219,4 +219,3 @@ td {
   text-align: center;
 }
 </style>
-

@@ -4,10 +4,7 @@
       <tr class="bg-gray-100 border-b-2 border-gray-400">
         <th></th>
         <th :class="{ up: this.sortOrder === 1, down: this.sortOrder === -1 }">
-          <span
-            @click="changeSortOrder"
-            class="underline cursor-pointer"
-          >
+          <span @click="changeSortOrder" class="underline cursor-pointer">
             Ranking
           </span>
         </th>
@@ -34,16 +31,18 @@
       >
         <td>
           <img
-            class="w-10 h-10" 
-            :src="`https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`" 
+            class="w-10 h-10"
+            :src="
+              `https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`
+            "
             alt="asset.name"
-          >
+          />
         </td>
         <td># {{ asset.rank }}</td>
         <td>
           <router-link
             class="text-green-600 hover:underline"
-            :to="{ name: 'coin-detail', params: { id: asset.id} }"
+            :to="{ name: 'coin-detail', params: { id: asset.id } }"
           >
             {{ asset.name }}
           </router-link>
@@ -54,7 +53,11 @@
         <td>{{ asset.priceUsd | dollar }}</td>
         <td>{{ asset.marketCapUsd | dollar }}</td>
         <td
-          :class="asset.changePercent24Hr.includes('-') ? 'text-red-600' : 'text-green-600'"
+          :class="
+            asset.changePercent24Hr.includes('-')
+              ? 'text-red-600'
+              : 'text-green-600'
+          "
         >
           {{ asset.changePercent24Hr | percent }}
         </td>
@@ -75,7 +78,7 @@ export default {
   name: 'PxAssetsTable',
 
   components: {
-    PxButton,
+    PxButton
   },
 
   props: {
@@ -86,38 +89,39 @@ export default {
   },
 
   computed: {
-    filteredAssets () {
+    filteredAssets() {
       const altOrder = this.sortOrder === 1 ? -1 : 1
 
-      return this.assets.filter(
-        asset =>
-          asset.name.toLowerCase().includes(this.filter.toLowerCase()) ||
-          asset.symbol.toLowerCase().includes(this.filter.toLowerCase())
-      )
-      .sort((a,b) => {
-        if (parseInt(a.rank) > parseInt(b.rank)) return this.sortOrder
+      return this.assets
+        .filter(
+          asset =>
+            asset.name.toLowerCase().includes(this.filter.toLowerCase()) ||
+            asset.symbol.toLowerCase().includes(this.filter.toLowerCase())
+        )
+        .sort((a, b) => {
+          if (parseInt(a.rank) > parseInt(b.rank)) return this.sortOrder
 
-        return altOrder
-      })
-    },
+          return altOrder
+        })
+    }
   },
 
-  data () {
+  data() {
     return {
       filter: '',
-      sortOrder: 1,
+      sortOrder: 1
     }
   },
 
   methods: {
-    changeSortOrder () {
+    changeSortOrder() {
       this.sortOrder = this.sortOrder === 1 ? -1 : 1
     },
 
     goToDetail(id) {
       this.$router.push({ name: 'coin-detail', params: { id } })
-    },
-  },
+    }
+  }
 }
 </script>
 
