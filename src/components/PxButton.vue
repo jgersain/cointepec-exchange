@@ -1,9 +1,9 @@
 <template>
   <button
     @click="manageClick"
-    class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-2 border border-green-500 hover:border-transparent rounded"
+    class="bg-transparent hover:bg-red-700 text-red-800 font-semibold hover:text-white py-2 px-2 border border-red-800 hover:border-transparent rounded"
   >
-    <beat-loader :loading="isLoading" :color="'#68d391'" :size="8" />
+    <beat-loader :loading="isLoading" :color="'#9b2c2c'" :size="8" />
     <p v-show="!isLoading">
       <slot></slot>
     </p>

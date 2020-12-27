@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <main class="bg-gray-100">
     <px-header :links="links" />
     <router-view
-      class="container px-5 sm:px-20 py-5 :px-20 flex justify-center"
+      class="container px-5 sm:px-20 py-10 :px-20 flex justify-center bg-white shadow-xs"
     />
   </main>
 </template>

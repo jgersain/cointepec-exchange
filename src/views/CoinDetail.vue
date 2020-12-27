@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col">
     <div class="flex justify-center">
-      <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
+      <hash-loader :loading="isLoading" :color="'#9b2c2c'" :size="100" />
     </div>
     <template v-if="!isLoading">
       <div class="flex flex-col sm:flex-row justify-around items-center">
@@ -51,7 +51,7 @@
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
           <button
             @click="toggleConverterPrice"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           >
             {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
@@ -109,7 +109,7 @@
             >
               <span>Obtener link</span>
             </px-button>
-            <a v-else class="hover:underline text-green-600" target="_blanck">
+            <a v-else class="hover:underline text-red-800" target="_blanck">
               {{ market.url }}
             </a>
           </td>

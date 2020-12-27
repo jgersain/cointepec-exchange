@@ -41,7 +41,7 @@
         <td># {{ asset.rank }}</td>
         <td>
           <router-link
-            class="text-green-600 hover:underline"
+            class="text-red-800 hover:underline"
             :to="{ name: 'coin-detail', params: { id: asset.id } }"
           >
             {{ asset.name }}
